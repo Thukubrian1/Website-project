@@ -6,45 +6,44 @@ import { Component } from '@angular/core';
   styleUrls: ['./shop.component.css']
 })
 export class ShopComponent {
-  layout: 'list' | 'grid' = 'list'; // Default layout for the data view
-  options: string[] = ['grid', 'list']; // Options for layout switch
+
 
   products = [
     {
       id: 1,
-      name: 'Product 1',
-      category: 'Category 1',
-      price: 29.99,
+      name: 'Bamboo Watch',
+      category: 'Accessories',
+      price: 65.00,
       inventoryStatus: 'INSTOCK',
-      rating: 4.5,
+      rating: 5,
       image: 'bamboo-watch.jpg'
     },
     {
       id: 2,
-      name: 'Product 2',
-      category: 'Category 2',
-      price: 49.99,
-      inventoryStatus: 'OUTOFSTOCK',
-      rating: 3.8,
+      name: 'Black Watch',
+      category: 'Accessories',
+      price: 72.00,
+      inventoryStatus: 'INSTOCK',
+      rating: 4,
       image: 'black-watch.jpg'
     },
     {
       id: 3,
-      name: 'Product 3',
-      category: 'Category 3',
-      price: 19.99,
+      name: 'Blue Band',
+      category: 'Fitness',
+      price: 79.00,
       inventoryStatus: 'LOWSTOCK',
-      rating: 4.2,
+      rating: 3,
       image: 'blue-band.jpg'
     },
     {
       id: 4,
-      name: 'Product 4',
-      category: 'Category 4',
-      price: 99.99,
+      name: 'Blue T-Shirt',
+      category: 'Clothing',
+      price: 29.00,
       inventoryStatus: 'INSTOCK',
-      rating: 5.0,
-      image: 'bracelet.jpg'
+      rating: 5,
+      image: 'blue-t-shirt.jpg'
     }
   ];
 

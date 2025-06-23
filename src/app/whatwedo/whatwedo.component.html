@@ -1,30 +1,13 @@
-<div class="grid">
+<div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
     <p-card 
         *ngFor="let card of cards" 
-        [style]="{ width: '15rem', overflow: 'hidden' }"
+        [style]="{ width: '100%', overflow: 'hidden' }"
         class="card">
         <ng-template pTemplate="header">
-            <img [alt]="card.title" class="w-full" [src]="card.image" />
+            <img [alt]="card.title" class="w-full object-cover" [src]="card.image" />
         </ng-template>
         <ng-template pTemplate="title">{{ card.title }}</ng-template>
         <ng-template pTemplate="subtitle">{{ card.subtitle }}</ng-template>
         <p>{{ card.content }}</p>
-
-        <!-- <ng-template pTemplate="footer">
-            <div class="buttons">
-                <p-button 
-                    label="Cancel" 
-                    severity="secondary" 
-                    class="w-full" 
-                    [outlined]="true" 
-                    styleClass="w-full"
-                    (click)="onCancel(card.id)" />
-                <p-button 
-                    label="Save" 
-                    class="w-full" 
-                    styleClass="w-full"
-                    (click)="onSave(card.id)" />
-            </div>
-        </ng-template> -->
     </p-card>
 </div>
