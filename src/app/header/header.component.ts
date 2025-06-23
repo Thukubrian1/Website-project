@@ -9,40 +9,48 @@ import { MenuItem } from 'primeng/api';
 })
 export class HeaderComponent {
 
-  constructor(private router: Router) { }
+  isMobileMenuOpen: boolean = false;
 
-  items: MenuItem[] = [];
-
-  ngOnInit() {
-    this.items = [
-      {
-        label: 'Home',
-        shortcut: 'Ctrl+H',
-        command: () => {
-          this.router.navigateByUrl('home');
-        }
-      },
-      {
-        label: 'Shop',
-        shortcut: 'Ctrl+S',
-        command: () => {
-          this.router.navigateByUrl('shop');
-        }
-      },
-      {
-        label: 'Events',
-        shortcut: null,
-        command: () => {
-          this.router.navigateByUrl('events');
-        }
-      },
-      {
-        label: 'Support',
-        shortcut: null,
-        command: () => {
-          this.router.navigateByUrl('support');
-        }
-      }
-    ];
+  toggleMobileMenu(): void {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
+
+
+  
+  // constructor(private router: Router) { }
+
+  // items: MenuItem[] = [];
+
+  // ngOnInit() {
+  //   this.items = [
+  //     {
+  //       label: 'Home',
+  //       shortcut: 'Ctrl+H',
+  //       command: () => {
+  //         this.router.navigateByUrl('home');
+  //       }
+  //     },
+  //     {
+  //       label: 'Shop',
+  //       shortcut: 'Ctrl+S',
+  //       command: () => {
+  //         this.router.navigateByUrl('shop');
+  //       }
+  //     },
+  //     {
+  //       label: 'Events',
+  //       shortcut: null,
+  //       command: () => {
+  //         this.router.navigateByUrl('events');
+  //       }
+  //     },
+  //     {
+  //       label: 'Support',
+  //       shortcut: null,
+  //       command: () => {
+  //         this.router.navigateByUrl('support');
+  //       }
+  //     }
+  //   ];
+  // }
 }
