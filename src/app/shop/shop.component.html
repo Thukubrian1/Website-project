@@ -1,90 +1,100 @@
-<div class="bg-gray-50 min-h-screen">
-    <p-dataView #dv [value]="products">
-        
-        <ng-template pTemplate="listItem" let-items>
-            <div *ngFor="let item of products; let first = first">
-                <div
-                    class="flex flex-col sm:flex-row sm:items-center p-6 gap-4"
-                    [ngClass]="{ 'border-t border-surface-200 dark:border-surface-700': !first }"
-                >
-                    <div class="md:w-40 relative">
-                        <img
-                            class="block xl:block mx-auto rounded w-full"
-                            [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + item.image"
-                            [alt]="item.name"
-                        />
-                        <p-tag
-                            [value]="item.inventoryStatus"
-                            [severity]="getSeverity(item)"
-                            class="absolute"
-                            styleClass="dark:!bg-surface-900"
-                            [style.left.px]="4"
-                            [style.top.px]="4"
-                        ></p-tag>
-                    </div>
-                    <div class="flex flex-col md:flex-row justify-between md:items-center flex-1 gap-6">
-                        <div class="flex flex-row md:flex-col justify-between items-start gap-2">
-                            <div>
-                                <span class="font-medium text-surface-500 dark:text-surface-400 text-sm">{{ item.category }}</span>
-                                <div class="text-lg font-medium mt-2">{{ item.name }}</div>
-                            </div>
-                            <div class="bg-surface-100 p-1" style="border-radius: 30px">
-                                <div
-                                    class="bg-surface-0 flex items-center gap-2 justify-center py-1 px-2"
-                                    style="border-radius: 30px; box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.04), 0px 1px 2px 0px rgba(0, 0, 0, 0.06)"
-                                >
-                                    <span class="text-surface-900 font-medium text-sm">{{ item.rating }}</span>
-                                    <i class="pi pi-star-fill text-yellow-500"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex flex-col md:items-end gap-8">
-                            <span class="text-xl font-semibold">{{ item.price | currency: 'USD' }}</span>
-                            <div class="flex flex-row-reverse md:flex-row gap-2">
-                                <button pButton icon="pi pi-heart" class="p-buttton outlined"></button>
-                                <button
-                                    pButton
-                                    icon="pi pi-shopping-cart"
-                                    label="Buy Now"
-                                    [disabled]="item.inventoryStatus === 'OUTOFSTOCK'"
-                                    class="flex-auto md:flex-initial whitespace-nowrap"
-                                ></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div id="animation-carousel" class="relative w-full" data-carousel="static">
+    <!-- Carousel wrapper -->
+    <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+      <!-- Carousel items -->
+      <div *ngFor="let image of images; let i = index" class="w-full h-full object-cover object-center"  [class.hidden]="currentIndex !== i" [class.block]="currentIndex === i">
+        <img [src]="image.src" [alt]="image.alt" class="w-full h-full object-cover object-center" />
+      </div>
+    </div>
+  
+    <!-- Slider controls -->
+    <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" (click)="prevImage()">
+      <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4" />
+        </svg>
+        <span class="sr-only">Previous</span>
+      </span>
+    </button>
+    <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" (click)="nextImage()">
+      <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+        </svg>
+        <span class="sr-only">Next</span>
+      </span>
+    </button>
+  </div>
+
+
+
+<div class="bg-gray-100 min-h-screen">
+    <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-8">Products</h2>
+  
+      <!-- Responsive grid layout -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <div *ngFor="let product of products" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+          <!-- Product Image with Stock Badge -->
+          <div class="relative">
+            <img [src]="product.image" [alt]="product.description" 
+                 class="w-full h-48 object-cover"/>
+            <!-- Stock Badge -->
+            <div class="absolute top-3 left-3">
+              <span [class]="getStockBadgeClass(product.stock)" 
+                    class="px-2 py-1 text-xs font-semibold rounded-full">
+                {{ product.stock }}
+              </span>
             </div>
-        </ng-template>
-        <ng-template pTemplate="gridItem" let-items>
-            <div class="grid grid-cols-2 gap-4 p-4">
-                <div *ngFor="let product of items" class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                    <div class="relative bg-gray-100 p-4 flex justify-center items-center" style="height: 180px;">
-                        <img
-                            class="max-w-full max-h-full object-contain"
-                            [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image"
-                            [alt]="product.name"
-                        />
-                        <p-tag
-                            [value]="product.inventoryStatus"
-                            [severity]="getSeverity(product)"
-                            class="absolute top-2 left-2 text-xs font-medium px-2 py-1"
-                        ></p-tag>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start mb-3">
-                            <div class="flex-1">
-                                <p class="text-sm text-gray-500 mb-1">{{ product.category }}</p>
-                                <h3 class="text-base font-medium text-gray-900">{{ product.name }}</h3>
-                            </div>
-                            <div class="flex items-center bg-gray-100 rounded-full px-2 py-1 ml-2">
-                                <span class="text-sm font-medium text-gray-900 mr-1">{{ product.rating }}</span>
-                                <i class="pi pi-star-fill text-yellow-400 text-sm"></i>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
+          </div>
+  
+          <!-- Product Details -->
+          <div class="p-4">
+            <!-- Category -->
+            <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">{{ product.category }}</p>
+            
+            <!-- Product Name -->
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ product.name }}</h3>
+            
+            <!-- Rating -->
+            <div class="flex items-center mb-3">
+              <div class="flex items-center">
+                <span *ngFor="let star of getStarArray(product.rating)" 
+                      class="text-yellow-400 text-sm">★</span>
+                <span *ngFor="let star of getEmptyStarArray(product.rating)" 
+                      class="text-gray-300 text-sm">★</span>
+              </div>
+              <span class="ml-2 text-sm text-gray-600">{{ product.rating }}</span>
             </div>
-        </ng-template>
-    </p-dataView>
-</div>
+            
+            <!-- Price -->
+            <p class="text-xl font-bold text-gray-900 mb-4">${{ product.price }}.00</p>
+            
+            <!-- Action Buttons -->
+            <div class="flex space-x-2">
+              <button 
+                (click)="onBuyNow(product)"
+                [disabled]="product.stock === 'OUTOFSTOCK'"
+                [class]="product.stock === 'OUTOFSTOCK' ? 
+                  'flex-1 bg-red-400 cursor-not-allowed text-white px-4 py-2 rounded-md text-sm font-medium flex items-center justify-center' :
+                  'flex-1 bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200 flex items-center justify-center'">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 1.5M7 13l1.5 1.5M17 21a2 2 0 100-4 2 2 0 000 4zM9 21a2 2 0 100-4 2 2 0 000 4z"></path>
+                </svg>
+                {{ product.stock === 'OUTOFSTOCK' ? 'Out of Stock' : 'Buy Now' }}
+              </button>
+              <button 
+                (click)="onAddToWishlist(product)"
+                class="bg-gray-200 text-gray-700 px-3 py-2 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 transition-colors duration-200"
+                title="Add to Wishlist">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.682l-1.318-1.364a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
