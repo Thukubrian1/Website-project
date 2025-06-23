@@ -56,6 +56,7 @@ import { DataViewModule } from 'primeng/dataview';
     CommonModule,
     SelectButtonModule,
     DataViewModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,18 +1,11 @@
-.grid{
-
+.grid {
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    margin: 10px;
 }
 
-.card{
-
-    padding-block-end: 10px;
-    margin: 5px;
-
-}
-
-.buttons{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.card img {
+    object-fit: cover;
+    width: 100%;
 }
