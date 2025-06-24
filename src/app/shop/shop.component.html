@@ -1,19 +1,21 @@
-<div class="container" style="margin-block-end: 30px;">
+<!--Navigation-->
+<div class="container" style="margin-bottom: 20px;">
   <app-header></app-header>
 </div>
 
+<!--Carousel-->
 <div id="animation-carousel" class="relative w-full" data-carousel="static">
     <!-- Carousel wrapper -->
-    <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+    <div class="relative h-70 overflow-hidden rounded-lg md:h-96">
       <!-- Carousel items -->
-      <div *ngFor="let image of images; let i = index" class="w-full h-full object-cover object-center"  [class.hidden]="currentIndex !== i" [class.block]="currentIndex === i">
+      <div *ngFor="let image of images; let i = index" class="w-full h-full object-contain object-center"  [class.hidden]="currentIndex !== i" [class.block]="currentIndex === i">
         <img [src]="image.src" [alt]="image.alt" class="w-full h-full object-cover object-center" />
       </div>
     </div>
   
     <!-- Slider controls -->
     <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" (click)="prevImage()">
-      <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+      <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white dark:bg-white group-hover:bg-white dark:group-hover:bg-white group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
         <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4" />
         </svg>
@@ -21,24 +23,33 @@
       </span>
     </button>
     <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" (click)="nextImage()">
-      <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+      <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white dark:bg-white group-hover:bg-white dark:group-hover:bg-white group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
         <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
         </svg>
         <span class="sr-only">Next</span>
       </span>
     </button>
-  </div>
+</div>
 
-
-
+<!--Products by Category-->
 <div class="bg-gray-100 min-h-screen">
-    <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      <h2 class="text-2xl font-bold text-gray-900 mb-8">Products</h2>
-  
-      <!-- Responsive grid layout -->
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    
+    <!-- Loop through each category -->
+    <div *ngFor="let categoryGroup of productsByCategory" class="mb-12">
+      
+      <!-- Category Header -->
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-3xl font-bold text-gray-900 capitalize">{{ categoryGroup.name }}</h2>
+        <div class="h-px bg-gray-300 flex-1 ml-6"></div>
+      </div>
+
+      <!-- Category Products Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-        <div *ngFor="let product of products" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+        <div *ngFor="let product of categoryGroup.products" 
+             class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+          
           <!-- Product Image with Stock Badge -->
           <div class="relative">
             <img [src]="product.image" [alt]="product.description" 
@@ -51,7 +62,7 @@
               </span>
             </div>
           </div>
-  
+
           <!-- Product Details -->
           <div class="p-4">
             <!-- Category -->
@@ -99,6 +110,12 @@
           </div>
         </div>
       </div>
+
+      <!-- Show message if no products in category -->
+      <div *ngIf="categoryGroup.products.length === 0" 
+           class="text-center py-12 text-gray-500">
+        <p class="text-lg">No products available in {{ categoryGroup.name }} category</p>
+      </div>
     </div>
   </div>
-  
+</div>

@@ -1,5 +1,4 @@
 .nav.active {
     text-decoration: underline;
-    color: blue;
     background-color:gray; /* bg-gray-900 */
 }

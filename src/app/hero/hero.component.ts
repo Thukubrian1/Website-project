@@ -6,30 +6,7 @@ import { Component,OnInit } from '@angular/core';
   styleUrls: ['./hero.component.css']
 })
 export class HeroComponent implements OnInit {
-
-//   activeIndex: number = 0;
-
-//   preventChange(event: any): void {
-//     // Force reset to index 0
-//     this.activeIndex = 0;
-//   }
-
-//   responsiveOptions: any[] = [
-//     {
-//         breakpoint: '1024px',
-//         numVisible: 1
-//     },
-//     {
-//         breakpoint: '768px',
-//         numVisible: 1
-//     },
-//     {
-//         breakpoint: '560px',
-//         numVisible: 1
-//     }
-//   ];
-
-
+  
 images : any[];
 
     responsiveOptions: any[] = [
