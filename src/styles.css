@@ -1,4 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 @tailwind base;
-@tailwind component;
+@tailwind components;
 @tailwind utilities;
+
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+
+  button {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  } */
