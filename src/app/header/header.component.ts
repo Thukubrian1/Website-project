@@ -15,7 +15,7 @@ export class HeaderComponent {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
 
-
+  isActive:boolean = true
   
   // constructor(private router: Router) { }
 

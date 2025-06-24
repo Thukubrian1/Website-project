@@ -4,7 +4,8 @@ import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ShopComponent } from './shop/shop.component';
 import { LandingComponent } from './landing/landing.component';
-// import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from './header/header.component';
+
 // import { HeroComponent } from './hero/hero.component';
 // import { AboutusComponent } from './aboutus/aboutus.component';
 // import { MissionComponent } from './mission/mission.component';
@@ -16,7 +17,7 @@ const routes: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'shop', component:ShopComponent},
   {path: 'landing', component:LandingComponent},
-  // {path: 'header', component:HeaderComponent},
+  {path: 'header', component:HeaderComponent},
   // {path: 'hero', component:HeroComponent},
   // {path: 'aboutus', component:AboutusComponent},
   // { path: 'mission', component:MissionComponent},
