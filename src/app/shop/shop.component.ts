@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.css']
 })
-export class ShopComponent {
+export class ShopComponent implements OnInit, OnDestroy {
 
   images = [
     {
@@ -30,8 +30,12 @@ export class ShopComponent {
     }
   ];
 
-
   currentIndex = 0;
+  
+  // New arrivals carousel properties
+  newArrivalsIndex = 0;
+  newArrivalsInterval: any;
+  autoPlayDuration = 4000; // 4 seconds
 
   prevImage(): void {
     this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
@@ -50,7 +54,8 @@ export class ShopComponent {
       image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=300&fit=crop',
       category: 'gears',
       stock: 'INSTOCK',
-      rating: 5
+      rating: 5,
+      isNewArrival: true
     },
     {
       name: 'Combat Vest',
@@ -59,7 +64,8 @@ export class ShopComponent {
       image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop',
       category: 'gears',
       stock: 'INSTOCK',
-      rating: 4
+      rating: 4,
+      isNewArrival: true
     },
     {
       name: 'Survival Gear Kit',
@@ -68,7 +74,8 @@ export class ShopComponent {
       image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop',
       category: 'gears',
       stock: 'LOWSTOCK',
-      rating: 5
+      rating: 5,
+      isNewArrival: true
     },
     {
       name: 'Tactical Backpack Pro',
@@ -113,7 +120,8 @@ export class ShopComponent {
       image: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400&h=300&fit=crop',
       category: 'gears',
       stock: 'OUTOFSTOCK',
-      rating: 4
+      rating: 4,
+      isNewArrival: true
     },
 
     // HELMETS CATEGORY - 8 products
@@ -124,7 +132,8 @@ export class ShopComponent {
       image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop',
       category: 'helmets',
       stock: 'INSTOCK',
-      rating: 5
+      rating: 5,
+      isNewArrival: true
     },
     {
       name: 'Tactical Bump Helmet',
@@ -187,7 +196,8 @@ export class ShopComponent {
       image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop',
       category: 'helmets',
       stock: 'LOWSTOCK',
-      rating: 5
+      rating: 5,
+      isNewArrival: true
     },
 
     // TOOLS CATEGORY - 8 products
@@ -234,7 +244,8 @@ export class ShopComponent {
       image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop',
       category: 'tools',
       stock: 'INSTOCK',
-      rating: 5
+      rating: 5,
+      isNewArrival: true
     },
     {
       name: 'Lock Pick Set',
@@ -264,6 +275,65 @@ export class ShopComponent {
       rating: 4
     }
   ];
+
+  ngOnInit(): void {
+    this.startNewArrivalsCarousel();
+  }
+
+  ngOnDestroy(): void {
+    this.stopNewArrivalsCarousel();
+  }
+
+  // Get new arrivals products
+  get newArrivals() {
+    return this.products.filter(product => product.isNewArrival);
+  }
+
+  // Get current new arrival product
+  get currentNewArrival() {
+    const newArrivals = this.newArrivals;
+    return newArrivals.length > 0 ? newArrivals[this.newArrivalsIndex] : null;
+  }
+
+  // Start auto-play carousel for new arrivals
+  startNewArrivalsCarousel(): void {
+    this.newArrivalsInterval = setInterval(() => {
+      this.nextNewArrival();
+    }, this.autoPlayDuration);
+  }
+
+  // Stop auto-play carousel
+  stopNewArrivalsCarousel(): void {
+    if (this.newArrivalsInterval) {
+      clearInterval(this.newArrivalsInterval);
+    }
+  }
+
+  // Navigate to next new arrival
+  nextNewArrival(): void {
+    const newArrivals = this.newArrivals;
+    if (newArrivals.length > 0) {
+      this.newArrivalsIndex = (this.newArrivalsIndex + 1) % newArrivals.length;
+    }
+  }
+
+  // Navigate to previous new arrival
+  prevNewArrival(): void {
+    const newArrivals = this.newArrivals;
+    if (newArrivals.length > 0) {
+      this.newArrivalsIndex = (this.newArrivalsIndex - 1 + newArrivals.length) % newArrivals.length;
+    }
+  }
+
+  // Pause carousel on hover
+  pauseCarousel(): void {
+    this.stopNewArrivalsCarousel();
+  }
+
+  // Resume carousel
+  resumeCarousel(): void {
+    this.startNewArrivalsCarousel();
+  }
 
   // Get products grouped by category
   get productsByCategory() {
