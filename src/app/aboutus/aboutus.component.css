@@ -4,7 +4,9 @@ h2{
     font-weight: bold;
 }
 
-*{
 
-    margin: 50px auto;
+.card{
+
+    margin: 20px;
+    background-color: rgb(251, 251, 251);
 }
