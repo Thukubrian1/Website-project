@@ -1,4 +1,10 @@
-<div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+<h2 class="text-3xl text-center font-bold tracking-tight m-10 text-gray-900 sm:text-4xl">What we do</h2>
+
+<div class="card">
+    
+
+<div class=" grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+
     <p-card 
         *ngFor="let card of cards" 
         [style]="{ width: '100%', overflow: 'hidden' }"
@@ -11,3 +17,4 @@
         <p>{{ card.content }}</p>
     </p-card>
 </div>
+</div>  

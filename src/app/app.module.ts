@@ -25,6 +25,7 @@ import { WhatwedoComponent } from './whatwedo/whatwedo.component';
 import { ShopComponent } from './shop/shop.component';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DataViewModule } from 'primeng/dataview';
+import { TeamComponent } from './team/team.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { DataViewModule } from 'primeng/dataview';
     MissionComponent,
     FooterComponent,
     WhatwedoComponent,
-    ShopComponent
+    ShopComponent,
+    TeamComponent
   ],
   imports: [
     BrowserModule,

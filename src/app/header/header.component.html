@@ -1,16 +1,70 @@
-<p-menubar [model]="items">
+<nav class="bg-black w-[100vw]">
+  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="relative flex h-16 items-center justify-between">
+      <!-- Logo -->
+      <div class="flex shrink-0 items-center">
+        <img class="h-8 w-auto rounded-full" src="../../assets/ariders.jpg" alt="ariders" />
+      </div>
 
-    <ng-template pTemplate="item" let-item let-root="root" (click)="navigate()">
-        <a pRipple class="flex align-items-center p-menuitem-link">
-            <span class="ml-2">{{ item.label }}</span>
-            <p-badge *ngIf="item.badge" [ngClass]="{ 'ml-auto': !root, 'ml-2': root }" [value]="item.badge" />
-            <i *ngIf="item.items" [ngClass]="['pi', root ? 'pi-angle-down ml-2' : 'pi-angle-right ml-auto']"></i>
-        </a>
-    </ng-template>
-    
-    <ng-template pTemplate="end">
-        <div class="flex align-items-center gap-2">
-            <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle" />
+      <!-- Desktop Navigation (hidden on mobile) -->
+      <div class="hidden sm:ml-6 sm:block">
+        <div class="flex space-x-4">
+          <a routerLink="/home" routerLinkActive="active"
+            class="nav rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white hover:text-black" style="color:#d4af37;">Home</a>
+          <a routerLink="/shop" routerLinkActive="active"
+            class="nav rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white hover:text-black" style="color:#d4af37;">Shop</a>
+          <a routerLink="/events" routerLinkActive="active"
+            class="nav rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white hover:text-black" style="color:#d4af37;">Events</a>
+          <a routerLink="/support" routerLinkActive="active"
+            class="nav rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white hover:text-black" style="color:#d4af37;">Support</a>
         </div>
-    </ng-template>
-</p-menubar>
+      </div>
+
+      <!-- Profile + Mobile Menu Button Container -->
+      <div class="flex items-center space-x-2 sm:space-x-0 sm:ml-3">
+        <div class="sm:hidden">
+          <button type="button"
+            class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset z-50"
+            aria-controls="mobile-menu" aria-expanded="false" (click)="toggleMobileMenu()">
+            <span class="absolute -inset-0.5"></span>
+            <span class="sr-only">Open main menu</span>
+            <svg class="block size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+              aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Profile dropdown -->
+        <!-- <div class="relative">
+          <img class="size-8 rounded-full" src="../../assets/batProfile.jpg" alt="" />
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Mobile menu -->
+  <div *ngIf="isMobileMenuOpen" class="absolute right-0 top-16 w-64 bg-gray-800 shadow-lg rounded-md z-40 sm:hidden"
+    id="mobile-menu">
+    <div class="space-y-1 px-4 pt-4 pb-3">
+      <a href="/home" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-gray-300"
+        aria-current="page">Home</a>
+      <a href="/shop"
+        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Shop</a>
+      <a href="/events"
+        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Events</a>
+      <a href="/support"
+        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Support</a>
+      <a href="/notifications"
+        class="block px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Notifications</a>
+      <a href="/profile"
+        class="block px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Profile</a>
+      <a href="/settings"
+        class="block px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Settings</a>
+      <a href="/signout"
+        class="block px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Sign out</a>
+    </div>
+  </div>
+
+</nav>
