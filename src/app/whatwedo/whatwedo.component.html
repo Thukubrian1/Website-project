@@ -1,20 +1,19 @@
-<h2 class="text-3xl text-center font-bold tracking-tight m-10 text-gray-900 sm:text-4xl">What we do</h2>
-
-<div class="card">
+<div class="card flex flex-col justify-center items-center">
     
+    <h2 class="text-3xl text-center font-bold tracking-tight m-10 text-gray-900 sm:text-4xl">What we do</h2>
 
-<div class=" grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center">
 
-    <p-card 
-        *ngFor="let card of cards" 
-        [style]="{ width: '100%', overflow: 'hidden' }"
-        class="card">
-        <ng-template pTemplate="header">
-            <img [alt]="card.title" class="w-full object-cover" [src]="card.image" />
-        </ng-template>
-        <ng-template pTemplate="title">{{ card.title }}</ng-template>
-        <ng-template pTemplate="subtitle">{{ card.subtitle }}</ng-template>
-        <p>{{ card.content }}</p>
-    </p-card>
+        <p-card 
+            *ngFor="let card of cards" 
+            [style]="{ width: '100%', overflow: 'hidden' }"
+            class="card">
+            <ng-template pTemplate="header">
+                <img [alt]="card.title" class="w-full object-cover" [src]="card.image" />
+            </ng-template>
+            <ng-template pTemplate="title">{{ card.title }}</ng-template>
+            <ng-template pTemplate="subtitle">{{ card.subtitle }}</ng-template>
+            <p>{{ card.content }}</p>
+        </p-card>
+    </div>
 </div>
-</div>  
