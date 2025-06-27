@@ -136,7 +136,7 @@
             </dl>
             
             <!-- Action Buttons -->
-            <div class="mt-10 flex items-center gap-x-6">
+            <div class="mt-10 flex pb-5 items-center gap-x-6">
               <button 
                 (click)="onBuyNow(currentNewArrival)"
                 [disabled]="currentNewArrival.stock === 'OUTOFSTOCK'"
@@ -156,7 +156,7 @@
       </div>
       
       <!-- Carousel Navigation -->
-      <div class="absolute bottom-1 left-1/4 transform -translate-x-1/2 flex space-x-2">
+      <div class="absolute bottom-1 pb-5 left-1/4 transform -translate-x-1/2 flex space-x-2">
         <button *ngFor="let product of newArrivals; let i = index"
                 (click)="newArrivalsIndex = i"
                 [class]="i === newArrivalsIndex ? 
