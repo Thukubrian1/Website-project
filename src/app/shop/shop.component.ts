@@ -3,32 +3,51 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
-  styleUrls: ['./shop.component.css']
+  styleUrls: ['./shop.component.css'],
 })
 export class ShopComponent implements OnInit, OnDestroy {
 
-  images = [
+  images: any[];
+
+  responsiveOptions: any[] = [
+      {
+          breakpoint: '991px',
+          numVisible: 4
+      },
+      {
+          breakpoint: '767px',
+          numVisible: 3
+      },
+      {
+          breakpoint: '575px',
+          numVisible: 1
+      }
+  ];
+
+  constructor(){
+  this.images = [
     {
-      src: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-01.jpg',
+      Imagesrc: 'assets/landing2.svg',
       alt: 'Earthen Bottle'
     },
     {
-      src: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-02.jpg',
+      Imagesrc: 'assets/landing3.svg',
       alt: 'Nomad Tumbler'
     },
     {
-      src: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-03.jpg',
+      Imagesrc: 'assets/landing2.svg',
       alt: 'Focus Paper Refill'
     },
     {
-      src: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-04.jpg',
+      Imagesrc: 'assets/landing3.svg',
       alt: 'Machined Mechanical Pencil'
     },
     {
-      src: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-05.jpg',
+      Imagesrc: 'assets/landing2.svg',
       alt: 'Leather Journal'
     }
   ];
+  }
 
   currentIndex = 0;
   
@@ -44,7 +63,7 @@ export class ShopComponent implements OnInit, OnDestroy {
   nextImage(): void {
     this.currentIndex = (this.currentIndex + 1) % this.images.length;
   }
-  
+
   products = [
     // GEARS products
     {
@@ -275,6 +294,7 @@ export class ShopComponent implements OnInit, OnDestroy {
       rating: 4
     }
   ];
+  
 
   ngOnInit(): void {
     this.startNewArrivalsCarousel();

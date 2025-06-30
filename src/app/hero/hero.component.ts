@@ -6,7 +6,16 @@ import { Component,OnInit } from '@angular/core';
   styleUrls: ['./hero.component.css']
 })
 export class HeroComponent implements OnInit {
+  currentIndex = 0;
   
+    prevImage(): void {
+      this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+    }
+  
+    nextImage(): void {
+      this.currentIndex = (this.currentIndex + 1) % this.images.length;
+    }
+
 images : any[];
 
     responsiveOptions: any[] = [
@@ -28,32 +37,27 @@ images : any[];
   constructor () {
   this.images = [
     {
-      previewImageSrc: 'assets/landing2.svg',
-      thumbnailImageSrc: 'assets/landing2.svg', 
+      previewImageSrc: 'assets/landing2.svg', 
       alt: 'Image 1',
       title: 'Image 1'
     },
     {
       previewImageSrc: 'assets/landing3.svg',
-      thumbnailImageSrc: 'assets/landing3.svg',
       alt: 'Image 2',
       title: 'Image 2'
     },
     {
       previewImageSrc: 'assets/landing2.svg',
-      thumbnailImageSrc: 'assets/landing2.svg', 
       alt: 'Image 3',
       title: 'Image 3'
     },
     {
       previewImageSrc: 'assets/landing3.svg',
-      thumbnailImageSrc: 'assets/landing3.svg', 
       alt: 'Image 4',
       title: 'Image 4'
     },
     {
       previewImageSrc: 'assets/landing2.svg',
-      thumbnailImageSrc: 'assets/landing2.svg', 
       alt: 'Image 5',
       title: 'Image 5'
     }
@@ -62,4 +66,5 @@ images : any[];
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
+
 }
