@@ -7,23 +7,29 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class ShopComponent implements OnInit, OnDestroy {
 
-  images: any[];
-
+  images: any[] = [];
+  currentImageIndex: number = 0;
+  
   responsiveOptions: any[] = [
-      {
-          breakpoint: '991px',
-          numVisible: 4
-      },
-      {
-          breakpoint: '767px',
-          numVisible: 3
-      },
-      {
-          breakpoint: '575px',
-          numVisible: 1
-      }
+    {
+      breakpoint: '1024px',
+      numVisible: 5
+    },
+    {
+      breakpoint: '768px',
+      numVisible: 3
+    },
+    {
+      breakpoint: '560px',
+      numVisible: 1
+    }
   ];
 
+  // Optional: Handle galleria's active index change to track current image
+  onActiveIndexChange(index: number): void {
+    this.currentImageIndex = index;
+  }
+  
   constructor(){
   this.images = [
     {

@@ -59,8 +59,25 @@ images : any[];
     }
   ]
 }
+
+currentIndex = 0;
+  
+// New arrivals carousel properties
+newArrivalsIndex = 0;
+newArrivalsInterval: any;
+autoPlayDuration = 4000; // 4 seconds
+
+
   ngOnInit(): void {
     throw new Error('Method not implemented.');
+  }
+
+  prevImage(): void {
+    this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+  }
+
+  nextImage(): void {
+    this.currentIndex = (this.currentIndex + 1) % this.images.length;
   }
 
 }
